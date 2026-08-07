@@ -40,6 +40,10 @@
                 </ul>
             </nav>
             <div class="header__actions d-none-mobile" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="400">
+                <a href="carrinho.html" class="cart-icon" style="position: relative; color: var(--color-text-main); font-size: 1.5rem; margin-right: 20px; transition: color 0.3s;">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-badge" style="position: absolute; top: -8px; right: -12px; background: var(--color-accent); color: #fff; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: bold; display: none;">0</span>
+                </a>
                 <a href="https://www.instagram.com/7bikes_sad/" target="_blank" class="social-icon">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
@@ -183,21 +187,95 @@
         </div>
     </section>
 
-    <!-- Gallery Masonry -->
-    <section class="gallery section">
+    <!-- Loja Virtual (Storefront) -->
+    <section class="store section" id="loja">
         <div class="container" data-aos="fade-up">
             <div class="section__header text-center">
-                <span class="section__tag">Nossa Loja</span>
-                <h2 class="section__title">Infraestrutura Completa</h2>
+                <span class="section__tag">Compre Online</span>
+                <h2 class="section__title">E-Bikes e Acessórios</h2>
                 <div class="section__divider mx-auto"></div>
+                <p class="section__subtitle">Confira nossos modelos de bicicletas elétricas premium e os melhores acessórios do mercado. Em até 12x no cartão.</p>
             </div>
             
-            <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                <div class="glass" style="border-radius: 8px; overflow: hidden;"><img src="img/img11.jpg" alt="7 Bikes" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;"></div>
-                <div class="glass" style="border-radius: 8px; overflow: hidden;"><img src="img/img16.jpg" alt="7 Bikes" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;"></div>
-                <div class="glass" style="border-radius: 8px; overflow: hidden;"><img src="img/img12.jpg" alt="7 Bikes" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;"></div>
-                <div class="glass" style="border-radius: 8px; overflow: hidden;"><img src="img/img14.jpg" alt="7 Bikes" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;"></div>
-                <div class="glass" style="border-radius: 8px; overflow: hidden;"><img src="img/img20.webp" alt="7 Bikes" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;"></div>
+            <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
+                <!-- Product 1 -->
+                <div class="product-card glass" style="border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; padding: 15px;">
+                    <img src="img/product_oggi.jpg" alt="Oggi Big Wheel 8.0" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">Oggi Big Wheel 8.0</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;">Motor Central 250W, Autonomia de até 60km. Ideal para trilhas e alta performance.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="color: var(--color-accent); font-weight: bold; font-size: 1.4rem;">R$ 7.500,00</span>
+                    </div>
+                    <button class="btn btn--primary add-to-cart" data-id="1" data-name="Oggi Big Wheel 8.0" data-price="7500.00" data-img="img/product_oggi.jpg" style="width: 100%; padding: 10px;">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card glass" style="border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; padding: 15px;">
+                    <img src="img/product_sense.jpg" alt="Sense E-Urban" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">Sense E-Urban</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;">Conforto máximo para a cidade. Bateria integrada e painel digital avançado.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="color: var(--color-accent); font-weight: bold; font-size: 1.4rem;">R$ 9.200,00</span>
+                    </div>
+                    <button class="btn btn--primary add-to-cart" data-id="2" data-name="Sense E-Urban" data-price="9200.00" data-img="img/product_sense.jpg" style="width: 100%; padding: 10px;">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card glass" style="border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; padding: 15px;">
+                    <img src="img/product_duos.jpg" alt="Duos Confort" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">Duos Confort</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;">O melhor custo-benefício. Motor de 350W e suspensão dianteira reforçada.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="color: var(--color-accent); font-weight: bold; font-size: 1.4rem;">R$ 4.500,00</span>
+                    </div>
+                    <button class="btn btn--primary add-to-cart" data-id="3" data-name="Duos Confort" data-price="4500.00" data-img="img/product_duos.jpg" style="width: 100%; padding: 10px;">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card glass" style="border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; padding: 15px;">
+                    <img src="img/product_caloi.jpg" alt="Caloi E-Vibe" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">Caloi E-Vibe</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;">A escolha confiável. Design urbano clássico com assistência de pedal impecável.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="color: var(--color-accent); font-weight: bold; font-size: 1.4rem;">R$ 6.300,00</span>
+                    </div>
+                    <button class="btn btn--primary add-to-cart" data-id="4" data-name="Caloi E-Vibe" data-price="6300.00" data-img="img/product_caloi.jpg" style="width: 100%; padding: 10px;">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card glass" style="border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; padding: 15px;">
+                    <img src="img/product_bateria.jpg" alt="Bateria Extra 36V 10Ah" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">Bateria Lítio 36V</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;">Dobre a sua autonomia. Bateria original de alta densidade.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="color: var(--color-accent); font-weight: bold; font-size: 1.4rem;">R$ 1.800,00</span>
+                    </div>
+                    <button class="btn btn--primary add-to-cart" data-id="5" data-name="Bateria Lítio 36V" data-price="1800.00" data-img="img/product_bateria.jpg" style="width: 100%; padding: 10px;">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card glass" style="border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s; padding: 15px;">
+                    <img src="img/product_capacete.jpg" alt="Capacete Aero" style="width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 5px;">Capacete Aero Premium</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;">Segurança máxima, ventilação inteligente e design moderno.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="color: var(--color-accent); font-weight: bold; font-size: 1.4rem;">R$ 290,00</span>
+                    </div>
+                    <button class="btn btn--primary add-to-cart" data-id="6" data-name="Capacete Aero Premium" data-price="290.00" data-img="img/product_capacete.jpg" style="width: 100%; padding: 10px;">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+
             </div>
         </div>
     </section>

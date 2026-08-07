@@ -40,4 +40,60 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 4. E-commerce Cart Logic
+    const updateCartBadge = () => {
+        let cart = JSON.parse(localStorage.getItem('7bikes_cart')) || [];
+        const badge = document.getElementById('cart-badge');
+        
+        if (badge) {
+            let totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            if (totalItems > 0) {
+                badge.style.display = 'block';
+                badge.innerText = totalItems;
+                
+                // Add pop animation
+                badge.style.transform = 'scale(1.5)';
+                setTimeout(() => badge.style.transform = 'scale(1)', 200);
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+    };
+
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+            const price = parseFloat(button.getAttribute('data-price'));
+            const img = button.getAttribute('data-img');
+
+            let cart = JSON.parse(localStorage.getItem('7bikes_cart')) || [];
+            
+            let existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id, name, price, img, quantity: 1 });
+            }
+
+            localStorage.setItem('7bikes_cart', JSON.stringify(cart));
+            
+            // Visual Feedback
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fa-solid fa-check"></i> Adicionado';
+            button.style.background = '#4CAF50';
+            updateCartBadge();
+
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = ''; // reset to class default
+            }, 1500);
+        });
+    });
+
+    // Initialize badge on page load
+    updateCartBadge();
 });

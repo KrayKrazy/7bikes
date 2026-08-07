@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras | 7 Bikes</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .cart-items {
+            background: var(--color-bg-surface);
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1.2rem;
+            font-family: var(--font-heading);
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--color-accent);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .cart-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .cart-quantity button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 5px;
+        }
+
+        .cart-remove {
+            color: #ff4444;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .cart-remove:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-summary {
+            background: var(--color-bg-surface);
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .summary-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-accent);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .installments {
+            margin-top: 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .installments select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-top: 10px;
+            outline: none;
+        }
+
+        .installments select option {
+            background: var(--color-bg-surface);
+            color: #fff;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--color-text-muted);
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 992px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="padding-top: 100px;">
+
+    <!-- Header -->
+    <header class="header" style="background: rgba(0,0,0,0.9);">
+        <div class="container header__inner">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpg" alt="7 Bikes Logo" style="height: 60px; border-radius: 5px; object-fit: contain;">
+            </a>
+            <div class="header__actions" style="display: flex; align-items: center; gap: 20px;">
+                <a href="index.html" class="btn btn--outline" style="padding: 8px 15px;">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar à Loja
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 style="font-family: var(--font-heading); margin-bottom: 10px;">Meu Carrinho</h1>
+        <p style="color: var(--color-text-muted);">Revise seus itens antes de finalizar a compra.</p>
+
+        <div class="cart-container" id="cart-container">
+            <!-- Items Area -->
+            <div class="cart-items" id="cart-items">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Summary Area -->
+            <div class="cart-summary">
+                <h3 style="font-family: var(--font-heading); margin-bottom: 20px; font-size: 1.5rem;">Resumo do Pedido</h3>
+                
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="summary-subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Frete:</span>
+                    <span style="color: #4CAF50;">Grátis</span>
+                </div>
+                
+                <div class="summary-row summary-total">
+                    <span>Total:</span>
+                    <span id="summary-total">R$ 0,00</span>
+                </div>
+
+                <div class="installments">
+                    <label for="installment-select" style="font-size: 0.9rem; color: var(--color-text-muted);">Simulador de Parcelamento</label>
+                    <select id="installment-select">
+                        <option value="1">1x sem juros</option>
+                    </select>
+                </div>
+
+                <button id="checkout-btn" class="btn btn--primary" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 1.1rem;">
+                    Finalizar Compra <i class="fa-solid fa-lock" style="font-size: 0.9rem; margin-left: 5px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Formata Moeda BRL
+        const formatMoney = (value) => {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        };
+
+        const cartItemsContainer = document.getElementById('cart-items');
+        const summarySubtotal = document.getElementById('summary-subtotal');
+        const summaryTotal = document.getElementById('summary-total');
+        const installmentSelect = document.getElementById('installment-select');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Carregar carrinho
+        const loadCartPage = () => {
+            let cart = JSON.parse(localStorage.getItem('7bikes_cart')) || [];
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <h2>Seu carrinho está vazio</h2>
+                        <p style="margin-top: 10px;">Volte para a loja e adicione alguns produtos esportivos.</p>
+                        <a href="index.html#loja" class="btn btn--primary" style="margin-top: 20px;">Explorar Produtos</a>
+                    </div>
+                `;
+                summarySubtotal.innerText = "R$ 0,00";
+                summaryTotal.innerText = "R$ 0,00";
+                updateInstallments(0);
+                checkoutBtn.disabled = true;
+                checkoutBtn.style.opacity = '0.5';
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            checkoutBtn.style.opacity = '1';
+
+            let itemsHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += (item.price * item.quantity);
+                itemsHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <div class="cart-item-price">${formatMoney(item.price)}</div>
+                        </div>
+                        <div class="cart-quantity">
+                            <button onclick="changeQty(${index}, -1)"><i class="fa-solid fa-minus"></i></button>
+                            <span style="font-weight: bold; width: 20px; text-align: center;">${item.quantity}</span>
+                            <button onclick="changeQty(${index}, 1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <button class="cart-remove" onclick="removeItem(${index})" title="Remover item">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = itemsHTML;
+            summarySubtotal.innerText = formatMoney(total);
+            summaryTotal.innerText = formatMoney(total);
+            updateInstallments(total);
+        };
+
+        // Alterar quantidade
+        window.changeQty = (index, delta) => {
+            let cart = JSON.parse(localStorage.getItem('7bikes_cart')) || [];
+            if (cart[index]) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity < 1) cart[index].quantity = 1;
+                localStorage.setItem('7bikes_cart', JSON.stringify(cart));
+                loadCartPage();
+            }
+        };
+
+        // Remover item
+        window.removeItem = (index) => {
+            let cart = JSON.parse(localStorage.getItem('7bikes_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('7bikes_cart', JSON.stringify(cart));
+            loadCartPage();
+        };
+
+        // Atualizar simulador de parcelas (Até 12x sem juros)
+        const updateInstallments = (total) => {
+            if (total === 0) {
+                installmentSelect.innerHTML = `<option>1x de R$ 0,00</option>`;
+                return;
+            }
+            
+            let optionsHTML = '';
+            for (let i = 1; i <= 12; i++) {
+                let parcelValue = total / i;
+                optionsHTML += `<option value="${i}">${i}x de ${formatMoney(parcelValue)} sem juros</option>`;
+            }
+            installmentSelect.innerHTML = optionsHTML;
+        };
+
+        // Finalizar Compra Fake
+        checkoutBtn.addEventListener('click', () => {
+            checkoutBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processando...';
+            
+            setTimeout(() => {
+                alert("Compra simulada com sucesso! Redirecionando...");
+                localStorage.removeItem('7bikes_cart');
+                window.location.href = "index.html";
+            }, 2000);
+        });
+
+        // Initialize
+        loadCartPage();
+
+    </script>
+</body>
+</html>
